@@ -29,6 +29,23 @@ resource "openstack_compute_instance_v2" "puppet_master" {
   }
 }
 
+resource "null_resource" "check_puppet_master" {
+
+  provisioner "remote-exec" {
+    inline = [
+      "while [ ! -f /var/lib/cloud/data/result.json ]; do sleep 1; done"
+    ]
+
+    connection {
+      timeout = "10m"
+      type = "ssh"
+      user = "root"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      host = "${openstack_compute_floatingip_associate_v2.puppet_master_float_ip.floating_ip}"
+    }
+  }
+}
+
 output "master_address" {
   value = "${openstack_compute_floatingip_associate_v2.puppet_master_float_ip.floating_ip}"
 }

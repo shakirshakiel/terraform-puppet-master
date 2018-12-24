@@ -24,7 +24,7 @@ EOF
 
 systemctl restart puppetserver
 
-yum install -y ruby git
+yum install -y ruby git lsof
 gem install r10k -v 2.6.4
 
 cat <<EOF >/root/r10k.yaml
