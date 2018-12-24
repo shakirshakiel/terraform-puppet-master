@@ -1,0 +1,9 @@
+*.tfstate
+*.tfstate.backup
+.terraform
+.idea
+.terraform.tfstate.lock.info
+.DS_Store
+terraform.tfvars
+creds.sh
+dummy_keypair
