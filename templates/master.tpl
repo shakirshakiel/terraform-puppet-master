@@ -1,5 +1,7 @@
 #!/bin/bash
 
+setenforce Permissive
+
 cat <<EOF >/etc/environment
 LANG=en_US.utf-8
 LC_CTYPE=en_US.utf-8
