@@ -8,6 +8,15 @@ LC_CTYPE=en_US.utf-8
 LC_ALL=en_US.utf-8
 EOF
 
+cat <<EOF >/root/.ssh/id_rsa
+${master_ssh_key}
+EOF
+chmod 0600 /root/.ssh/id_rsa
+
+cat <<EOF >/root/.ssh/id_rsa.pub
+${master_ssh_pub_key}
+EOF
+
 cat <<EOF >/root/.ssh/authorized_keys
 ${ssh_key}
 EOF

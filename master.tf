@@ -14,6 +14,8 @@ data "template_file" "master" {
   vars {
     puppet_master_host = "puppet-master-${var.name}.novalocal"
     ssh_key = "${file("~/.ssh/id_rsa.pub")}"
+    master_ssh_key = "${file("master-ssh-key/id_rsa")}"
+    master_ssh_pub_key = "${file("master-ssh-key/id_rsa.pub")}"
   }
 }
 

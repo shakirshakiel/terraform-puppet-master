@@ -7,3 +7,4 @@
 terraform.tfvars
 creds.sh
 dummy_keypair
+master-ssh-key
