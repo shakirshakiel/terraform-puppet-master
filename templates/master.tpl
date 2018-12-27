@@ -47,3 +47,10 @@ sources:
 EOF
 
 r10k deploy environment production --puppetfile -c /root/r10k.yaml -v info
+
+cat <<EOF >/root/.puppetlabs/bolt/bolt.yaml
+modulepath: /etc/puppetlabs/code/environments/production/site/
+ssh:
+  host-key-check: false
+  private-key: /root/.ssh/id_rsa
+EOF
