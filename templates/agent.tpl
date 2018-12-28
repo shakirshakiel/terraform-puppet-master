@@ -8,7 +8,6 @@ EOF
 
 cat <<EOF >/root/.ssh/authorized_keys
 ${ssh_key}
-${master_ssh_pub_key}
 EOF
 
 yum install -y https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm

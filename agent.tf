@@ -18,7 +18,6 @@ data "template_file" "agent" {
     puppet_master_ip = "${openstack_compute_floatingip_associate_v2.puppet_master_float_ip.floating_ip}"
     puppet_master_host = "${openstack_compute_instance_v2.puppet_master.name}.novalocal"
     ssh_key = "${file("~/.ssh/id_rsa.pub")}"
-    master_ssh_pub_key = "${file("master-ssh-key/id_rsa.pub")}"
   }
 }
 
