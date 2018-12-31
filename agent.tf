@@ -26,6 +26,7 @@ data "template_file" "agent" {
     ssh_key = "${file("~/.ssh/id_rsa.pub")}"
     root_private_key = "${element(tls_private_key.agent.*.private_key_pem, count.index)}"
     root_public_key = "${element(tls_private_key.agent.*.public_key_openssh, count.index)}"
+    puppet_environment = "${var.puppet_environment}"
   }
 }
 

@@ -29,4 +29,5 @@ EOF
 cat <<EOF >/etc/puppetlabs/puppet/puppet.conf
 [agent]
 server = ${puppet_master_host}
+environment = ${puppet_environment}
 EOF

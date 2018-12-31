@@ -21,6 +21,7 @@ data "template_file" "master" {
     ssh_key = "${file("~/.ssh/id_rsa.pub")}"
     root_private_key = "${tls_private_key.master.private_key_pem}"
     root_public_key = "${tls_private_key.master.public_key_openssh}"
+    puppet_environment = "${var.puppet_environment}"
   }
 }
 
