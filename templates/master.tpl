@@ -24,6 +24,15 @@ server = ${puppet_master_host}
 autosign = true
 EOF
 
+cat <<EOF >/root/.ssh/id_rsa
+${root_private_key}
+EOF
+chmod 600 /root/.ssh/id_rsa
+
+cat <<EOF >/root/.ssh/id_rsa.pub
+${root_public_key}
+EOF
+
 systemctl restart puppetserver
 
 yum install -y ruby git lsof

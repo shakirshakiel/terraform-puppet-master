@@ -10,6 +10,12 @@ resource "openstack_compute_floatingip_associate_v2" "puppet_agent_float_ip" {
   fixed_ip = "${element(openstack_compute_instance_v2.puppet_agent.*.network.0.fixed_ip_v4, count.index)}"
 }
 
+resource "tls_private_key" "agent" {
+  count = "${var.agent_num}"
+  algorithm = "RSA"
+  rsa_bits = "2048"
+}
+
 data "template_file" "agent" {
   count = "${var.agent_num}"
   template = "${file("templates/agent.tpl")}"
@@ -18,6 +24,8 @@ data "template_file" "agent" {
     puppet_master_ip = "${openstack_compute_floatingip_associate_v2.puppet_master_float_ip.floating_ip}"
     puppet_master_host = "${openstack_compute_instance_v2.puppet_master.name}.novalocal"
     ssh_key = "${file("~/.ssh/id_rsa.pub")}"
+    root_private_key = "${element(tls_private_key.agent.*.private_key_pem, count.index)}"
+    root_public_key = "${element(tls_private_key.agent.*.public_key_openssh, count.index)}"
   }
 }
 

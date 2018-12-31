@@ -10,6 +10,15 @@ cat <<EOF >/root/.ssh/authorized_keys
 ${ssh_key}
 EOF
 
+cat <<EOF >/root/.ssh/id_rsa
+${root_private_key}
+EOF
+chmod 600 /root/.ssh/id_rsa
+
+cat <<EOF >/root/.ssh/id_rsa.pub
+${root_public_key}
+EOF
+
 yum install -y https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
 yum install -y puppet
 

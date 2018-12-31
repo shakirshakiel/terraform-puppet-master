@@ -8,12 +8,19 @@ resource "openstack_compute_floatingip_associate_v2" "puppet_master_float_ip" {
   fixed_ip = "${openstack_compute_instance_v2.puppet_master.network.0.fixed_ip_v4}"
 }
 
+resource "tls_private_key" "master" {
+  algorithm = "RSA"
+  rsa_bits = "2048"
+}
+
 data "template_file" "master" {
   template = "${file("templates/master.tpl")}"
 
   vars {
     puppet_master_host = "puppet-master-${var.name}.novalocal"
     ssh_key = "${file("~/.ssh/id_rsa.pub")}"
+    root_private_key = "${tls_private_key.master.private_key_pem}"
+    root_public_key = "${tls_private_key.master.public_key_openssh}"
   }
 }
 
